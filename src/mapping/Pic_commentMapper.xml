@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.frank.dao.Pic_commentMapper">
+
+
+    <resultMap id="commentList" type="com.frank.bean.Pic_comment">
+        <id column="commentId" property="commentId"/>
+        <result column="user_name" property="user_name"/>
+        <result column="topic_id" property="topic_id"/>
+        <result column="content" property="content"/>
+        <result column="time" property="time"/>
+        <result column="likes" property="likes"/>
+        <collection property="list" ofType="com.frank.bean.User">
+            <result property="user_img" column="userImg"/>
+        </collection>
+    </resultMap>
+    <select id="findCommentsByTopicId" parameterType="int" resultMap="commentList">
+        SELECT pic_comment.*,users.userImg
+        FROM pic_comment,users where pic_comment.topic_id=#{id}
+        AND pic_comment.user_name=users.userName;
+    </select>
+    <insert id="addComments" parameterType="com.frank.bean.Pic_comment">
+        INSERT  INTO pic_comment values(#{topic_id},#{user_name},#{time},#{content},#{likse});
+    </insert>
+    <update id="likeComment" parameterType="int">
+        UPDATE topic_comment SET likes=(select likes form topic_comment WHERE commentId=#{id})
+        WHERE commentId=#{id}
+    </update>
+</mapper>

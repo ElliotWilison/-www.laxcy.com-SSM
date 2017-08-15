@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.frank.dao.Subs_fanMapper">
+<resultMap id="subscribeList" type="com.frank.bean.Subscribe">
+    <result property="subscribe_name" column="subscribe_name"/>
+ <result property="user_name" column="user_name"/>
+    <!--<collection property="list" ofType="com.frank.bean.User">-->
+        <!--<result property="user_img" column="userImg"/>-->
+    <!--</collection>-->
+</resultMap>
+
+    <resultMap id="fanList" type="com.frank.bean.Fan">
+        <result property="fan_name" column="fan_name"/>
+        <result property="user_name" column="user_name"/>
+        <!--<collection property="list" ofType="com.frank.bean.User">-->
+            <!--<result property="user_img" column="userImg"/>-->
+        <!--</collection>-->
+    </resultMap>
+
+    <select id="countUserSubscribe" parameterType="String" resultType="int">
+        SELECT  count(*) from subscribe WHERE user_name=#{username}
+    </select>
+
+    <select id="countUserFans" parameterType="String" resultType="int">
+        SELECT  count(*) from fan WHERE user_name=#{username}
+    </select>
+
+    <select id="showUserSubscribe" parameterType="String" resultMap="subscribeList">
+        SELECT * from subscribe where user_name=#{username}
+    </select>
+
+    <select id="showUserFans" parameterType="String" resultMap="fanList">
+        SELECT * from fan where user_name=#{username}
+    </select>
+<delete id="unfollowUser" parameterType="String">
+    DELETE  from subscribe where user_name=#{0} and subscribe_name=#{1}
+
+    DELETE  from fan WHERE user_name=#{1} and fan_name=#{0}
+
+</delete>
+    <insert id="followUser" parameterType="String">
+        INSERT into subscribe(user_name,subscribe_name) VALUES (#{0},#{1})
+
+        INSERT into fan(user_name,fan_name) VALUES (#{1},#{0})
+
+    </insert>
+</mapper>

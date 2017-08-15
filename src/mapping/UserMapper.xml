@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    namespace：必须与对应的接口全类名一致  UserMapper.java
+    id ：必须与对应接口的某个对应的方法名一致即必须要和UserMapper.java接口中的方法同名。
+ -->
+
+<mapper namespace="com.frank.dao.UserMapper">
+
+<select id="userLogin" parameterType="java.lang.String" resultType="com.frank.bean.User">
+    SELECT * from users WHERE userName=#{userName} AND pwd=#{pwd}
+</select>
+
+    <insert id="registerSave" parameterType="java.lang.String">
+
+        INSERT into users(userName,pwd)  VALUES (#{userName},#{pwd})
+
+    </insert>
+
+    <update id="updatePersonalInfo" parameterType="com.frank.bean.User" >
+        update users SET
+        sex=#{sex},
+        birth=#{birth},
+        signature=#{signature},
+        userImg=#{userImg},
+        userPhone=#{userPhone},
+        userMail=#{userMail},
+        location=#{location}
+         where userName=#{userName}
+    </update>
+
+    <update id="updatePersonalImg" parameterType="java.lang.String">
+        UPDATE users set
+        userImg=#{userImg}
+        where userName=#{userName}
+
+    </update>
+
+    <select id="findUserByName" parameterType="String" resultType="com.frank.bean.User">
+        SELECT * FROM  users WHERE userName=#{userName}
+    </select>
+
+
+    <update id="bindUserPhone" parameterType="String">
+
+        update users set bindPhone=#{phone} WHERE  userName=#{userName}
+
+    </update>
+
+    <update id="bindUserMail" parameterType="String">
+         update users set bindMail=#{1} WHERE  userName=#{0}
+    </update>
+
+
+
+</mapper>

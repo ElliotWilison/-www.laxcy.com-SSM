@@ -1,0 +1,76 @@
+.container{
+    width: 800px;
+    box-shadow: 0 0 10px #CFCFCF;
+    margin: auto;
+    overflow: hidden;
+}
+.user_banner{
+    width: 600px;
+    height: 130px;
+    margin: auto;
+    text-align: center;
+    padding: 20px;
+    display: -webkit-box;
+}
+.user_banner img{
+    height: 100px;
+    width: 100px;
+    overflow: hidden;
+}
+.user_banner h2{
+    position: absolute;
+    top: 65px;
+    left:510px;
+}
+.user_banner h4{
+    position: absolute;
+    top:85px;
+    left:650px;
+}
+.user_design{
+    width: 800px;
+    height: 150px;
+}
+.design_area{
+    width: 770px;
+    height: 140px;
+
+
+}
+.inline_box{
+    display: block;
+    display: -webkit-box;
+}
+.pick_category{
+    width: 90px;
+    height: 104px;
+    background-color: #777777;
+    border: 1px solid black;
+    opacity: 0.8;
+}
+
+.send_msg{
+    width: 768px;
+    height: 40px;
+    border:  1px solid gray;
+    display: -webkit-box;
+    z-index: 99;
+}
+
+.send_msg p{
+    font-size: larger;
+    line-height: 250%;
+    font-family: FrankRuehl;
+    padding-left: 15px;
+}
+/*.send_msg input{*/
+    /*position: absolute;*/
+    /*right: 300px;*/
+    /*padding: 8px;*/
+    /*background-color: gray;*/
+    /*border: 1px solid gray;*/
+/*}*/
+a{
+    text-decoration: none;
+    font-size: 20px;
+}

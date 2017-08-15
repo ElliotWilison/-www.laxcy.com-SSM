@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.frank.dao.Vid_topicMapper">
+
+    <resultMap id="Vid_topicList" type="com.frank.bean.Vid_topic">
+        <id column="topicId" property="topicId"/>
+        <result column="userId" property="userId"/>
+        <result column="title" property="title"/>
+        <result column="content" property="content"/>
+        <result column="tags" property="tags"/>
+        <result column="uploadTime" property="uploadTime"/>
+        <result column="likes" property="likes"/>
+    </resultMap>
+
+    <select id="findTopicByTitle" parameterType="String" resultType="com.frank.bean.Vid_topic">
+        SELECT * FROM vid_topic WHERE title LIKE %#{title}%
+    </select>
+    <insert id="savePic_topic" parameterType="com.frank.bean.Vid_topic">
+
+        INSERT  into vid_topic VALUES (#{userId},#{title},#{content},#{tags},#{uploadTime})
+    </insert>
+
+    <delete id="deleteVid_topicByTopicId" parameterType="int">
+        DELETE  from vid_topic WHERE topicId=#{id}
+
+    </delete>
+    <update id="likePic_topic" parameterType="int">
+        UPDATE vid_topic set likes=(SELECT likes from pic_topic WHERE topicId=#{id})+1
+        WHERE topicId=#{id}
+    </update>
+    <select id="showMyTopics" parameterType="String" resultMap="Vid_topicList">
+        SELECT * from vid_topic WHERE user_name=#{userName}
+    </select>
+
+    <select id="findVid_topicsByTag" parameterType="String" resultMap="Vid_topicList">
+        SELECT * from vid_topic where tags like %#{tag}%
+    </select>
+</mapper>
